@@ -6,6 +6,13 @@
 
 <br>
 
+### 0. 문제 풀이 상태에 대한 태그
+- saw discussion : 스스로 풀지 못해서 디스커션을 본 상태
+- need optimization : 스스로 풀었으나 개선된 다른 방법으로 풀어봐야 하는 경우
+- complete success : 스스로 풀었고 대부분의 discussion이 나와 같은 방법으로 풀었을 경우
+
+<br> 
+
 ### 1. 알고리즘
 - DP
     - CLASSIC
@@ -17,7 +24,7 @@
         - hashmap
     - OTHERS
         - linear
-        - kanpsack
+        - knapsack
         - interval
         - multi dimensions
         - bit
