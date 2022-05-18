@@ -1,4 +1,25 @@
 
+# 파일명 규정
+알고리즘
+
+- 양식
+
+    (최초 작성일)-algo-(플랫폼명)-(문제 번호)
+
+    `2022-05-18-algo-leetcode-768`
+
+- 플랫폼명
+    - leetcode : leetcode
+    - 백준 : baekjoon
+
+TIL
+
+- 양식
+
+    (최초 작성일)-til-(그날의 작성 순서)
+
+<br>
+
 # 태그 목록
 최종 수정일 : 2022-05-13
 
@@ -7,7 +28,8 @@
 <br>
 
 ### 0. 문제 풀이 상태에 대한 태그
-- saw discussion : 스스로 풀지 못해서 디스커션을 본 상태
+- chaos : 아예 접근을 하지 못해서 discussion을 본 상태
+- saw discussion : 접근을 시도했으나 시간 초과가 되어 discussion을 본 상태
 - need optimization : 스스로 풀었으나 개선된 다른 방법으로 풀어봐야 하는 경우
 - complete success : 스스로 풀었고 대부분의 discussion이 나와 같은 방법으로 풀었을 경우
 
@@ -53,10 +75,21 @@
 <br>
 
 ## [2] TIL 관련 태그
-- github
-- java
-- spring
-- jpa
-- dataJPA
-- queryDsl
-- SQL
+<br>
+
+- 출처 분류
+    - algo (알고리즘 강의 정리)
+    - book
+    - lecture (기술 강의 정리)
+
+<br>
+
+- 주제 분류
+
+    - github
+    - java
+    - spring
+    - jpa
+    - dataJPA
+    - queryDsl
+    - SQL
