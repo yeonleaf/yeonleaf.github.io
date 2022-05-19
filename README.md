@@ -28,7 +28,7 @@ TIL
 <br>
 
 ### 0. 문제 풀이 상태에 대한 태그
-- chaos : 아예 접근을 하지 못해서 discussion을 본 상태
+- total chaos : 아예 접근을 하지 못해서 discussion을 본 상태
 - saw discussion : 접근을 시도했으나 시간 초과가 되어 discussion을 본 상태
 - need optimization : 스스로 풀었으나 개선된 다른 방법으로 풀어봐야 하는 경우
 - complete success : 스스로 풀었고 대부분의 discussion이 나와 같은 방법으로 풀었을 경우
