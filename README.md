@@ -60,7 +60,7 @@ TIL
 - MST(최소 스패닝 트리)
 - DFS/BFS
 - BT
-- 그리디
+- greedy
 - 구현
 
 <br>
