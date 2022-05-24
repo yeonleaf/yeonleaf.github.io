@@ -1,6 +1,6 @@
 ---
 title: "(146) LRU Cache"
-excerpt: " "
+excerpt: "linked-list(double) + hashmap"
 
 categories:
     - algorithm
@@ -10,7 +10,7 @@ tags:
 toc: true
 
 date: 2022-05-23
-last_modified_at: 2022-05-23
+last_modified_at: 2022-05-24
 ---
 
 ## **문제 링크**
@@ -175,5 +175,274 @@ expected == result
 
 double linked-list + hashmap
 
+---
+---
+
+
+<br>
+
+
+---
+---
+ 
+## **CODE 2**:
+### <u>날짜</u> 2022-05-24
+#### <u>총 소요시간</u> 25*3 -> 시간 초과
+
+<br>
+
+#### <u>설계</u>
+```python
+'''
+dict {} (key : value)
+
+LRU -> double linked list로 추적
+
+linked = Node()
+= head (Node)
+= last (Node)
+
+Node
+val
+next
+prev
+
+update (키를 찾아서 맨 뒤로 보내기)
+<cur = head에서 시작해서 key가 나올 때까지 while문>
+find = cur
+cur.prev.next = cur.next
+find.next = None
+last.next = find
+last = last.next
+
+get
+key가 dict에 없으면 return -1
+update(key)
+return dict[key]
+
+put
+key가 dict에 있으면
+    dict[key] = value
+    update(key)
+key가 dict에 없으면
+    dict[key] = value
+    last.next = Node(key)
+    last = last.next
+    
+    if len(dict.values()) > capacity:
+        del dict[head.val]
+        head = head.next
+    
+'''
+```
+
+#### <u>코드</u>
+```python
+
+class Node:
+    def __init__(self, val: int):
+        self.val = val
+        self.prev = None
+        self.next = None
+
+class LRUCache:
+
+    def __init__(self, capacity: int):
+        linked = None
+        self.head = linked
+        self.dict_val = {}
+        self.capacity = capacity
+        
+    def update(self, key: int) -> None:
+
+        cur = self.head
+        while cur and cur.val != key:
+            cur = cur.next
+        
+        if cur == self.head:
+            return 
+            
+        find = cur
+        if cur.prev:
+            cur.prev.next = cur.next
+        else:
+            self.head = self.head.next
+        find.prev = self.last
+        find.next = None
+        self.last.next = find
+        self.last = self.last.next
+    
+    def get(self, key: int) -> int:
+        if key not in self.dict_val:
+            return -1
+        self.update(key)
+        return self.dict_val[key]
+        
+    def put(self, key: int, value: int) -> None:
+        if key in self.dict_val:
+            self.dict_val[key] = value
+            self.update(key)
+        else:
+            # 하나의 노드도 없는 경우
+            if not self.head:
+                self.dict_val[key] = value
+                self.head = Node(key)
+                self.last = self.head
+            else:
+                self.dict_val[key] = value
+                new = Node(key)
+                new.prev = self.last
+                self.last.next = new
+                self.last = self.last.next
+                if len(self.dict_val.values()) > self.capacity:
+                    del self.dict_val[self.head.val]
+                    self.head = self.head.next
+        
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
+
+
+
+```
+
+#### <u>디버깅</u>
+```python
+["LRUCache", "put", "get", "put", "put", "get", "put", "get"]
+[[1], [2, 2], [2], [3, 1], [3, 2], [2], [3, 3], [3]]
+
+```
+<br>
+
+#### <u>다른 방식</u>
+[Discusstion Link](https://leetcode.com/problems/lru-cache/discuss/45911/Java-Hashtable-%2B-Double-linked-list-(with-a-touch-of-pseudo-nodes))
+
+head -- 노드들 -- tail
+
+노드를 넣을 때는 항상 head.next에 넣는다.
+
+노드를 업데이트할 때는 노드를 제거 + 노드 넣기
+
+노드 자체를 넘겨주면 굳이 head에서부터 시작해서 탐색할 필요가 없다.
+
+가장 오래된 노드를 pop할 때는 tail.pre를 제거한다.
+
+이렇게 하는 이유는 null 체크를 번거롭게 하지 않기 위해서다.
+
+```java
+import java.util.Hashtable;
+
+
+public class LRUCache {
+
+class DLinkedNode {
+  int key;
+  int value;
+  DLinkedNode pre;
+  DLinkedNode post;
+}
+
+/**
+ * Always add the new node right after head;
+ */
+private void addNode(DLinkedNode node) {
+    
+  node.pre = head;
+  node.post = head.post;
+
+  head.post.pre = node;
+  head.post = node;
+}
+
+/**
+ * Remove an existing node from the linked list.
+ */
+private void removeNode(DLinkedNode node){
+  DLinkedNode pre = node.pre;
+  DLinkedNode post = node.post;
+
+  pre.post = post;
+  post.pre = pre;
+}
+
+/**
+ * Move certain node in between to the head.
+ */
+private void moveToHead(DLinkedNode node){
+  this.removeNode(node);
+  this.addNode(node);
+}
+
+// pop the current tail. 
+private DLinkedNode popTail(){
+  DLinkedNode res = tail.pre;
+  this.removeNode(res);
+  return res;
+}
+
+private Hashtable<Integer, DLinkedNode> 
+  cache = new Hashtable<Integer, DLinkedNode>();
+private int count;
+private int capacity;
+private DLinkedNode head, tail;
+
+public LRUCache(int capacity) {
+  this.count = 0;
+  this.capacity = capacity;
+
+  head = new DLinkedNode();
+  head.pre = null;
+
+  tail = new DLinkedNode();
+  tail.post = null;
+
+  head.post = tail;
+  tail.pre = head;
+}
+
+public int get(int key) {
+
+  DLinkedNode node = cache.get(key);
+  if(node == null){
+    return -1; // should raise exception here.
+  }
+
+  // move the accessed node to the head;
+  this.moveToHead(node);
+
+  return node.value;
+}
+
+
+public void put(int key, int value) {
+  DLinkedNode node = cache.get(key);
+
+  if(node == null){
+
+    DLinkedNode newNode = new DLinkedNode();
+    newNode.key = key;
+    newNode.value = value;
+
+    this.cache.put(key, newNode);
+    this.addNode(newNode);
+
+    ++count;
+
+    if(count > capacity){
+      // pop the tail
+      DLinkedNode tail = this.popTail();
+      this.cache.remove(tail.key);
+      --count;
+    }
+  }else{
+    // update the value.
+    node.value = value;
+    this.moveToHead(node);
+  }
+}
+
+}
+```
 ---
 ---
