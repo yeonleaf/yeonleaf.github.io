@@ -10,7 +10,7 @@ tags:
 toc: true
 
 date: 2022-05-23
-last_modified_at: 2022-05-24
+last_modified_at: 2022-05-25
 ---
 
 ## **문제 링크**
@@ -443,6 +443,139 @@ public void put(int key, int value) {
 }
 
 }
+```
+---
+---
+
+
+<br>
+
+---
+---
+ 
+## **CODE 3**: PRACTICE
+### <u>날짜</u> 2022-05-25
+#### <u>총 소요시간</u> 1h
+
+<br>
+
+#### <u>설계</u>
+```python
+'''
+dic {} key : node
+
+head(Node), tail(Node)
+head.next = tail
+tail.prev = head
+
+addNode(node)
+    head의 next에 노드를 넣는다.
+    
+deleteNode(node)
+    node.prev.next = node.next
+    
+updateNode(node)
+    deleteNode
+    addNode
+    
+get(key)
+    dic에 key가 없으면 return -1
+    key가 있으면 
+    updateNode(dic[key])
+    return dic[key].val
+
+put(key:value)
+    dic에 key가 있으면
+        dic[key].val = value
+        updateNode(dic[key])
+    
+    dic에 key가 없으면
+        new = Node(key, value)
+        addNode(new)
+        
+        count ++ 
+        
+        count > capacity:
+            t = tail.pre
+            deleteNode(t)
+            del dic[t.key]
+        
+'''
+```
+
+#### <u>코드</u>
+```python
+
+class Node:
+    def __init__(self, key, val):
+        self.key = key
+        self.val = val
+        self.prev = None
+        self.next = None
+
+class LRUCache:
+
+
+    def __init__(self, capacity: int):
+        
+        self.capacity = capacity
+        
+        self.head = Node(-1, -1)
+        self.tail = Node(-1, -1)
+
+        self.dic = {}
+        self.count = 0
+        
+        self.head.next = self.tail
+        self.tail.prev = self.head
+
+    def addNode(self, node: Node) -> None:
+        node.prev = self.head
+        node.next = self.head.next
+        self.head.next.prev = node
+        self.head.next = node
+        
+    def deleteNode(self, node: Node) -> None:
+        pre = node.prev
+        post = node.next
+        
+        pre.next = post
+        post.prev = pre
+        
+    def updateNode(self, node: Node) -> None:
+        self.deleteNode(node)
+        self.addNode(node)
+
+        
+    def get(self, key: int) -> int:
+        if key not in self.dic:
+            return -1
+        self.updateNode(self.dic[key])
+        return self.dic[key].val
+
+    def put(self, key: int, value: int) -> None:
+        if key in self.dic:
+            self.dic[key].val = value
+            self.updateNode(self.dic[key])
+        else:
+            new = Node(key, value)
+            self.addNode(new)
+            self.dic[key] = new
+            self.count += 1
+            
+            if self.count > self.capacity:
+                t = self.tail.prev
+                print("[%s]"%t.val)
+                self.deleteNode(t)
+                del self.dic[t.key]
+                self.count -= 1
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
+
+
 ```
 ---
 ---
