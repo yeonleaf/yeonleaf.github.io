@@ -1,6 +1,6 @@
 ---
-title: "알고리즘 템플릿"
-excerpt: "알고리즘 템플릿"
+title: ""
+excerpt: ""
 
 categories:
     - algorithm
@@ -31,9 +31,12 @@ last_modified_at:
 ```python
 ```
 
+<br>
+
 #### <u>코드</u>
 ```python
 ```
+<br>
 
 #### <u>디버깅</u>
 ```python
@@ -44,5 +47,6 @@ last_modified_at:
 [Discusstion Link](link)
 ```python
 ```
+
 ---
 ---

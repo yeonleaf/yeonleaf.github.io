@@ -5,12 +5,12 @@ excerpt: "linked-list(double) + hashmap"
 categories:
     - algorithm
 tags:
-    - [leetcode, medium, hashmap, linked-list(double), saw discussion]
+    - [leetcode, medium, hashmap, linked-list(double), practice finished]
 
 toc: true
 
 date: 2022-05-23
-last_modified_at: 2022-05-25
+last_modified_at: 2022-05-26
 ---
 
 ## **문제 링크**
@@ -577,5 +577,92 @@ class LRUCache:
 
 
 ```
+---
+---
+
+<br>
+
+---
+---
+ 
+## **CODE 4**: PRACTICE (ACCEPTED)
+### <u>날짜</u> 2022-05-26
+#### <u>총 소요시간</u>
+
+<br>
+
+
+#### <u>코드</u>
+```python
+class Node:
+    def __init__(self, key: int, val: int):
+        self.key = key
+        self.val = val
+        self.prev = None
+        self.next = None
+        
+
+class LRUCache:
+
+    def __init__(self, capacity: int):
+        self.head = Node(-1, -1)
+        self.tail = Node(-1, -1)
+        
+        self.head.next = self.tail
+        self.tail.prev = self.head
+        
+        self.dic = {}
+        
+        self.count = 0
+        self.capacity = capacity
+        
+    
+    def addNode(self, node: Node):
+        node.prev = self.head
+        node.next = self.head.next
+        self.head.next.prev = node
+        self.head.next = node
+        
+    def deleteNode(self, node: Node):
+        pre = node.prev
+        post = node.next
+        
+        pre.next = post
+        post.prev = pre
+        
+    def updateNode(self, node: Node):
+        self.deleteNode(node)
+        self.addNode(node)
+
+    def get(self, key: int) -> int:
+        if key not in self.dic:
+            return -1
+        self.updateNode(self.dic[key])
+        return self.dic[key].val
+        
+
+    def put(self, key: int, value: int) -> None:
+        if key in self.dic:
+            self.dic[key].val = value
+            self.updateNode(self.dic[key])
+        else:
+            new = Node(key, value)
+            self.addNode(new)
+            self.dic[key] = new
+            
+            self.count += 1
+            
+            if self.count > self.capacity:
+                realTail = self.tail.prev
+                self.deleteNode(realTail)
+                del self.dic[realTail.key]
+                self.count -= 1
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
+```
+
 ---
 ---
