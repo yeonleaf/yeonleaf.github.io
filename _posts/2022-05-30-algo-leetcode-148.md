@@ -5,12 +5,12 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [leetcode, medium, linked-list(single)]
+    - [leetcode, medium, linked-list(single), saw discussion]
 
 toc: true
 
 date: 2022-05-30
-last_modified_at: 2022-05-30
+last_modified_at: 2022-05-31
 ---
 
 ## **문제 링크**
@@ -124,6 +124,122 @@ public class Solution {
 
 }
 ```
+
+---
+---
+
+<br>
+
+---
+---
+ 
+## **CODE 2**: Practice
+### <u>날짜</u> 2022-05-31
+#### <u>총 소요시간</u>
+
+<br>
+
+#### <u>설계</u>
+```python
+'''
+
+prev null
+walk head
+fast head
+slow, walk, fast로 중앙을 찾기
+
+prev = walk
+walk.next
+fast.next.next
+left, right를 정렬하기
+return left, right를 merge하기
+
+merge(left, right)
+dummy 빈 리스트노드
+cur = dummy
+
+left or right
+left가 right보다 작으면
+cur.next = left
+left = left.next
+cur = cur.next
+
+left가 right보다 크면
+cur.next = right
+right = right.next
+cur = cur.next
+
+left and not right이면
+남은 left를 cur에 붙이기
+
+not left and right이면
+남은 right를 cur에 붙이기
+'''
+```
+
+<br>
+
+#### <u>코드</u>
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        
+        
+        def divide(head):
+            
+            if not head or not head.next:
+                return head
+            
+            prev = None
+            walk = head
+            fast = head
+            
+            while fast and fast.next:
+                prev = walk
+                walk = walk.next
+                fast = fast.next.next
+
+            prev.next = None
+
+            left = divide(head)
+            right = divide(walk)
+            
+            return merge(left, right)
+        
+        def merge(l, r):
+            dummy = ListNode()
+            cur = dummy
+            
+            while l and r:
+                if l.val <= r.val:
+                    cur.next = l
+                    l = l.next
+                    cur = cur.next
+                else:
+                    cur.next = r
+                    r = r.next
+                    cur = cur.next
+            
+            while l and not r:
+                cur.next = l
+                l = l.next
+                cur = cur.next
+            
+            while not l and r:
+                cur.next = r
+                r = r.next
+                cur = cur.next
+            
+            return dummy.next
+    
+        return divide(head)
+```
+<br>
 
 ---
 ---
