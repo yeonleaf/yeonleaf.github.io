@@ -5,12 +5,12 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [leetcode, medium, linked-list(single), saw discussion]
+    - [leetcode, medium, linked-list(single), practice finished]
 
 toc: true
 
 date: 2022-05-30
-last_modified_at: 2022-05-31
+last_modified_at: 2022-06-01
 ---
 
 ## **문제 링크**
@@ -238,6 +238,84 @@ class Solution:
             return dummy.next
     
         return divide(head)
+```
+<br>
+
+---
+---
+
+<br>
+
+
+---
+---
+ 
+## **CODE 3**: ACCEPTED
+### <u>날짜</u> 2022-06-01
+#### <u>총 소요시간</u> 15m
+
+
+<br>
+
+#### <u>코드</u>
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        
+        
+        def sort(head):
+            
+            if not head or not head.next:
+                return head
+            
+            # 리스트를 두 파트로 나눈다.
+            prev = None
+            slow, fast = head, head
+            
+            while fast and fast.next:
+                prev = slow
+                slow = slow.next
+                fast = fast.next.next
+            
+            # 두 리스트를 다시 재귀호출해서 나눈다.
+            right = sort(slow)
+            prev.next = None
+            left = sort(head)
+            
+            # 두 리스트를 합친다.
+            return merge(left, right)
+        
+        def merge(l, r):
+            new = ListNode()
+            dummy = new
+            while l and r:
+                if l.val <= r.val:
+                    dummy.next = l
+                    l = l.next
+                    dummy = dummy.next
+                else:
+                    dummy.next = r
+                    r = r.next
+                    dummy = dummy.next
+            
+            while not l and r:
+                dummy.next = r
+                r = r.next
+                dummy = dummy.next
+            
+            while l and not r:
+                dummy.next = l
+                l = l.next
+                dummy = dummy.next
+            
+            return new.next
+        
+        return sort(head)
 ```
 <br>
 

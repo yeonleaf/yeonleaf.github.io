@@ -79,6 +79,7 @@ TIL
 <br>
 
 - 출처 분류
+    - proj
     - algo (알고리즘 강의 정리)
     - book
     - lecture (기술 강의 정리)
