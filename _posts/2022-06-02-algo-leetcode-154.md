@@ -5,12 +5,12 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [leetcode, medium, binary search, need optimization]
+    - [leetcode, medium, binary search, practice finished]
 
 toc: true
 
 date: 2022-06-02
-last_modified_at: 2022-06-02
+last_modified_at: 2022-06-03
 ---
 
 ## **문제 링크**
@@ -136,5 +136,65 @@ public:
     }
 };
 ```
+---
+---
+
+
+<br>
+
+
+---
+---
+ 
+## **CODE 2**: PRACTICE
+### <u>날짜</u> 2022-06-03
+#### <u>총 소요시간</u>
+
+<br>
+
+#### <u>설계</u>
+```python
+'''
+l, m, r
+m > r이면 l = m+1
+m <= r이면
+    m < r인 경우
+        r = m
+    m == r인 경우
+        r -= 1
+[3, 1, 1, 1, 1, 1, 3]
+'''
+```
+
+<br>
+
+#### <u>코드</u>
+```python
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        
+        n = len(nums)
+        l, r = 0, n-1
+        
+        while l < r:
+            m = (l + r) // 2
+            if nums[m] > nums[r]:
+                l = m + 1
+            else:
+                if nums[m] == nums[r]:
+                    r -= 1
+                else:
+                    r = m
+        
+        return nums[l]
+```
+<br>
+
+#### <u>디버깅</u>
+```python
+[3, 3, 1, 3] # 값 대신 인덱스를 쓴 실수 - 수정
+```
+<br>
+
 ---
 ---

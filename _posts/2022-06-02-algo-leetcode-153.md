@@ -5,12 +5,12 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [leetcode, medium, binary search, need optimization]
+    - [leetcode, medium, binary search, practice finished]
 
 toc: true
 
 date: 2022-06-02
-last_modified_at: 2022-06-02
+last_modified_at: 2022-06-03
 ---
 
 ## **문제 링크**
@@ -166,6 +166,50 @@ class Solution:
         # without ever disqualifying a possible minimum
         return nums[left]
 ```
+
+---
+---
+
+
+<br>
+
+---
+---
+ 
+## **CODE 2**: PRACTICE
+### <u>날짜</u> 2022-06-03
+#### <u>총 소요시간</u>
+
+<br>
+
+#### <u>설계</u>
+```python
+'''
+nums[m] > nums[r]이면 l = m+1
+아니면 r = m
+
+'''
+```
+
+<br>
+
+#### <u>코드</u>
+```python
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+
+        n = len(nums)
+        l, r = 0, n-1
+        while l < r:
+            m = (l + r) // 2
+            if nums[m] > nums[r]:
+                l = m+1
+            else:
+                r = m
+        
+        return nums[l]
+```
+<br>
 
 ---
 ---
