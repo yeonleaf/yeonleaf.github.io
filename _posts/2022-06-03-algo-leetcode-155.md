@@ -5,12 +5,12 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [leetcode, easy, stack, need optimization]
+    - [leetcode, easy, stack, practice finished]
 
 toc: true
 
 date: 2022-06-03
-last_modified_at: 2022-06-03
+last_modified_at: 2022-06-04
 ---
 
 ## **문제 링크**
@@ -115,6 +115,67 @@ def getMin(self):
         return None
     else:
         return self.q[len(self.q) - 1][1]
+```
+
+---
+---
+
+
+<br>
+
+---
+---
+ 
+## **CODE 2**: ACCEPTED
+### <u>날짜</u> 2022-06-04
+#### <u>총 소요시간</u>
+
+<br>
+
+#### <u>코드</u>
+```python
+'''
+스택 하나 사용
+
+(val, minval)
+
+
+push::
+lastMin = stack[-1][1]
+stack.append((val, max(lastMin, val)))
+
+getMin:
+return stack[-1][1]
+'''
+
+class MinStack:
+
+    def __init__(self):
+        self.stack = []
+
+    def push(self, val: int) -> None:
+        if not self.stack:
+            self.stack.append((val, val))
+        else:
+            lastMin = self.stack[-1][1]
+            self.stack.append((val, min(lastMin, val)))
+
+    def pop(self) -> None:
+        self.stack.pop()
+
+    def top(self) -> int:
+        return self.stack[-1][0]
+
+    def getMin(self) -> int:
+        return self.stack[-1][1]
+
+
+# Your MinStack object will be instantiated and called as such:
+# obj = MinStack()
+# obj.push(val)
+# obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.getMin()
 ```
 
 ---
