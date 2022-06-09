@@ -120,3 +120,94 @@ class Solution:
 
 ---
 ---
+
+<br>
+
+---
+---
+ 
+## **CODE 2**: ACCEPTED
+### <u>날짜</u> 2022-06-08
+#### <u>총 소요시간</u>
+
+<br>
+
+#### <u>설계</u>
+```python
+'''
+max - min // len(nums)-1
+9 - 1 // 4 -> 2
+
+mindp 0~2,3~5,6~8,9~11로 나눌 수 있음
+maxdp mindp와 동일
+
+nums에 있는 값을 mindp, maxdp에 차례대로 넣기
+mindp[nums[i] // len(nums)-1] = min(mindp[[nums[i] // len(nums)-1]], nums[i])
+
+0 1 2 
+
+i = 1부터 끝까지
+res와 mindp[i]-maxdp[i-1] 비교
+'''
+```
+
+<br>
+
+#### <u>코드</u>
+```python
+class Solution:
+    def maximumGap(self, nums: List[int]) -> int:
+        
+        n = len(nums)
+        
+        if n < 2:
+            return 0
+        
+        mi, ni = max(nums), min(nums)
+        
+        if mi - ni == 0:
+            return 0
+        
+        bkt = math.ceil((mi - ni) / (n - 1))
+        
+        minNums = [int(1e9)]*n
+        maxNums = [-int(1e9)]*n
+        
+        for num in nums:
+            minNums[(num-ni)//bkt] = min(minNums[(num-ni)//bkt], num)
+            maxNums[(num-ni)//bkt] = max(maxNums[(num-ni)//bkt], num)  
+
+        res = -int(1e9)
+        mi, ni = 0, 1
+        while ni < n:
+            if minNums[ni] != int(1e9) and maxNums[mi] != -int(1e9):
+                res = max(res, minNums[ni] - maxNums[mi])
+                mi += 1
+                ni += 1
+            else:
+                if minNums[ni] == int(1e9):
+                    ni += 1
+                if maxNums[mi] == -int(1e9):
+                    mi += 1
+        
+        return res
+```
+<br>
+
+#### <u>디버깅</u>
+```python
+[0, 4, 2, 5, 33]
+expected == result
+
+[1, 17, 3, 5, 199, 3, 52, 4]
+expected == result
+
+[1, 1, 1, 2, 2, 3]
+expected != result -> fix
+(division by zero)
+
+
+```
+
+---
+---

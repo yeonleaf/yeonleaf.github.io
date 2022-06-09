@@ -5,12 +5,12 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [leetcode, medium, saw discussion]
+    - [leetcode, medium, practice finished]
 
 toc: true
 
 date: 2022-06-07
-last_modified_at: 2022-06-07
+last_modified_at: 2022-06-08
 ---
 
 ## **문제 링크**
@@ -71,6 +71,55 @@ factor 5를 계산한 이후에
 5^2로 몇 번 나눌 수 있는지
 5^3로 몇 번 나눌 수 있는지...
 를 쭉 더하면 된다.
+```
+
+---
+---
+
+<br>
+
+---
+---
+ 
+## **CODE 2**: ACCEPTED
+### <u>날짜</u> 2022-06-08
+#### <u>총 소요시간</u>
+
+<br>
+
+#### <u>설계</u>
+```python
+'''
+res += 5의 제곱수로 나누기
+return res
+'''
+```
+
+<br>
+
+#### <u>코드</u>
+```python
+class Solution:
+    def trailingZeroes(self, n: int) -> int:
+
+        res = 0
+        div = 5
+        
+        while div <= n:
+            res += (n // div)
+            div *= 5
+        
+        return res
+```
+<br>
+
+#### <u>디버깅</u>
+```python
+123
+expected == result
+
+10000
+expected == result
 ```
 
 ---

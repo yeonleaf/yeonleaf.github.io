@@ -5,7 +5,7 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [leetcode, easy, saw discussion]
+    - [leetcode, easy, practice finished]
 
 toc: true
 
@@ -91,6 +91,63 @@ class Solution:
             num = (num-1) // 26
         result.reverse()
         return ''.join(result)
+```
+
+---
+---
+
+
+<br>
+
+
+---
+---
+ 
+## **CODE 2**: ACCEPTED
+### <u>날짜</u> 2022-06-08
+#### <u>총 소요시간</u> 25m
+
+<br>
+
+#### <u>설계</u>
+```python
+'''
+28%26
+
+while num > 0:
+res.append(dic[num % 26])
+num -= (num % 26)
+
+return "".join(res[::-1])
+'''
+```
+
+<br>
+
+#### <u>코드</u>
+```python
+class Solution:
+    def convertToTitle(self, num: int) -> str:
+
+        dic = []
+        for i in range(65, 91):
+            dic.append(chr(i))
+        
+        res = []
+        
+        while num > 0:
+            res.append(dic[(num-1)%26])
+            num = (num-1) // 26
+        
+        return "".join(res[::-1])
+```
+<br>
+
+```python
+A~Z
+0~25 -> 0~25
+1~26 -> 1~25 + 0 -> division error 발생
+이 때문에 num-1 % 26으로 처리해 주는 것
 ```
 
 ---
