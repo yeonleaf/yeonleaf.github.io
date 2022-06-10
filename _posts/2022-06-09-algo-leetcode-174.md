@@ -10,7 +10,7 @@ tags:
 toc: true
 
 date: 2022-06-09
-last_modified_at: 2022-06-09
+last_modified_at: 2022-06-10
 ---
 
 ## **문제 링크**
@@ -114,6 +114,49 @@ expected(1) != result(2)
 DP 문제였다..ㅎ
 
 TOP-DOWN DP로 다시 풀어보기
+
+---
+---
+
+<br>
+
+---
+---
+ 
+## **CODE 2**: 시간 초과
+### <u>날짜</u> 2022-06-10
+#### <u>총 소요시간</u> 25 + 14m
+
+<br>
+
+#### <u>설계</u>
+```python
+'''
+ij가 0이나 양수인 경우 필요한 체력 : 1
+ij가 음수인 경우 필요한 체력 : -(ij) + 1
+
+dp[i][j] = 00에서 ij까지 가기 위해 필요한 minimum 체력
+dp[0][0]은 초기화 필요 (0이나 양수이면 1, 음수이면 -(ij)+1)
+
+rec(i, j)
+
+base case
+i, j가 m-1, n-1인 경우
+    return 0
+
+dp[i][j]가 있으면 return
+
+dp[i][j] = int(1e9)
+오른쪽, 아래로 이동
+    ni, nj가 0이나 양수인 경우
+        dp[i][j] = min(dp[i][j], rec(ni, nj))
+    ni, nj가 음수인 경우
+        dp[i][j] = min(dp[i][j], -dungeon[ni][nj] + 1 + rec(ni, nj))
+        
+return dp[i][j]
+
+'''
+```
 
 ---
 ---
