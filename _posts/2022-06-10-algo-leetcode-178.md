@@ -62,6 +62,5 @@ WHERE S.Score<=S2.Score
 GROUP BY S.Id 
 ORDER BY S.Score DESC;
 ```
-
 ---
 ---

@@ -34,14 +34,14 @@ last_modified_at:
 <br>
 
 #### <u>코드</u>
-```sql
+```python
 ```
 <br>
 
 
 #### <u>다른 방식</u>
 [Discusstion Link]()
-```sql
+```python
 ```
 
 ---
