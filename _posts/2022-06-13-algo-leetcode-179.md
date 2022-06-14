@@ -5,12 +5,12 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [leetcode, medium, sorting, greedy, saw discussion]
+    - [leetcode, medium, sorting, greedy, practice finished]
 
 toc: true
 
 date: 2022-06-13
-last_modified_at: 2022-06-13
+last_modified_at: 2022-06-14
 ---
 
 ## **문제 링크**
@@ -93,6 +93,89 @@ def compare(self, n1, n2):
 compare 함수 기억해 두기
 3, 30이 있을 때
 303(n1 + n2) vs 330(n2 + n1)을 비교해서 n2 + n1이 더 크면 swap하는 방식
+
+---
+---
+
+<br>
+
+---
+---
+ 
+## **CODE 2**: 
+### <u>날짜</u> 2022-06-14
+#### <u>총 소요시간</u> 
+
+<br>
+
+#### <u>설계</u>
+```python
+'''
+nums를 str로 바꾸기
+정렬 (x[0] 기준으로)
+
+버블 정렬
+
+count가 0이면 break
+
+for i in range(1, n):
+    nums[i-1][0] == nums[i][0]이면 swap할지 말지를 확인한다.
+        check(nums[i-1], nums[i])이 True이면 
+            nums[i-1], nums[i] = nums[i], nums[i-1]
+
+def check(n1, n2): (swap해야 하는지 말아야 하는지)
+    return int(str(n1) + str(n2)) < int(str(n2) + str(n1))
+'''
+```
+
+<br>
+
+#### <u>코드</u>
+```python
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        
+        n = len(nums)
+
+        if n == 1:
+            return str(nums[0])
+        
+        def check(n1, n2):
+            return int(str(n1) + str(n2)) < int(str(n2) + str(n1))
+        
+        str_nums = [str(i) for i in nums]
+        
+        str_nums.sort(reverse = True, key = lambda x: x[0])        
+        
+        while True:
+            count = 0
+            
+            for i in range(1, n):
+                if str_nums[i-1][0] == str_nums[i][0]:
+                    if check(str_nums[i-1], str_nums[i]):
+                        str_nums[i-1], str_nums[i] = str_nums[i], str_nums[i-1]
+                        count += 1
+            
+            if count == 0:
+                break
+        
+        if str_nums[0] == "0":
+            return "0"
+        return "".join(str_nums)     
+```
+<br>
+
+#### <u>디버깅</u>
+```python
+[332, 333, 335, 34, 3]
+expected == result
+
+[3]
+expected == result
+
+[0, 0]
+expected != result -> fix (line 162~163)
+```
 
 ---
 ---
