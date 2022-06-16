@@ -5,7 +5,7 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [leetcode, hard, saw discussion]
+    - [leetcode, hard, need practice]
 
 toc: true
 
@@ -22,7 +22,7 @@ last_modified_at: 2022-06-15
 ---
  
 ## **CODE 1**: 시간 초과
-### <u>날짜</u> 2022-06-15
+### <u>날짜</u> 2022-06-16
 #### <u>총 소요시간</u> 
 
 <br>
@@ -61,6 +61,14 @@ E.Salary <= E2.Salary
 group by D.ID,E.Name having count(distinct E2.Salary) <= 3
 order by D.Name, E.Salary desc
 ```
+
+```sql
+E.Salary <= E2.Salary
+
+count(distinct E2.salary) <= 3
+```
+
+이 두 부분은 rank를 의미한다. E보다 높은 E2 salary(distinct)가 3개 미만이어야 3등 안에 들 수 있음
 
 ---
 ---

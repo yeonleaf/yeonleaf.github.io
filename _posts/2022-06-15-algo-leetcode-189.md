@@ -5,12 +5,12 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [leetcode, medium, saw discussion]
+    - [leetcode, medium, practice finished]
 
 toc: true
 
 date: 2022-06-15
-last_modified_at: 2022-06-15
+last_modified_at: 2022-06-16
 ---
 
 ## **문제 링크**
@@ -85,3 +85,55 @@ reversed함수를 사용할 수 없기 때문에 (in-place 규정에 어긋남)
 ---
 ---
 
+<br>
+
+---
+---
+ 
+## **CODE 2**: ACCEPTED
+### <u>날짜</u> 2022-06-16
+#### <u>총 소요시간</u> 
+
+<br>
+
+#### <u>설계</u>
+```python
+'''
+전체 뒤집기
+0:k-1까지 뒤집기
+k:끝까지 뒤집기
+
+l부터 r까지의 원소를 뒤집는 메서드 만들기
+
+'''
+```
+
+<br>
+
+#### <u>코드</u>
+```python
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+        
+        n = len(nums)
+        
+        if n == 1:
+            return nums
+        
+        k %= n
+        
+        def reverse(l, r):
+            
+            while l < r:
+                nums[l], nums[r] = nums[r], nums[l]
+                l += 1
+                r -= 1
+            
+        reverse(0, n-1)
+        reverse(0, k-1)
+        reverse(k, n-1)
+```
+<br>
+
+---
+---
