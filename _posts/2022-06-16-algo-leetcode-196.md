@@ -5,12 +5,12 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [leetcode, easy, sql, saw discussion]
+    - [leetcode, easy, sql, need practice]
 
 toc: true
 
 date: 2022-06-16
-last_modified_at: 2022-06-16
+last_modified_at: 2022-06-17
 ---
 
 ## **문제 링크**
@@ -47,6 +47,29 @@ delete from Person where id not in(
     ) t
 )
 ```
+
+---
+---
+
+<br>
+
+---
+---
+ 
+## **CODE 2**: PRACTICE
+### <u>날짜</u> 2022-06-17
+#### <u>총 소요시간</u> 
+
+<br>
+
+#### <u>코드</u>
+```sql
+-- Please write a DELETE statement and DO NOT write a SELECT statement.
+-- Write your MySQL query statement below
+delete from Person where id not in
+(select id from (select min(id) as id, email from Person p group by email) t);
+```
+<br>
 
 ---
 ---

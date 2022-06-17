@@ -59,9 +59,10 @@ TIL
 - 다익스트라
 - 이분탐색
 - 유니온 파인드
-- MST(최소 스패닝 트리)
-- DFS/BFS
-- BT
+- mst(최소 스패닝 트리)
+- dfs
+- bfs
+- bt
 - greedy
 - 구현
 
