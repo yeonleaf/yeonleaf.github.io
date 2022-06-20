@@ -38,6 +38,10 @@ last_modified_at:
 ```
 <br>
 
+#### <u>디버깅</u>
+```python
+```
+<br>
 
 #### <u>다른 방식</u>
 [Discusstion Link]()

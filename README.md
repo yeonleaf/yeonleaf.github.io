@@ -38,7 +38,7 @@ TIL
 <br> 
 
 ### 1. 알고리즘
-- DP
+- dp
     - CLASSIC
         - kadane
         - LCS
@@ -56,6 +56,7 @@ TIL
         - tree
         - string
         - probability
+- sorting
 - 다익스트라
 - 이분탐색
 - 유니온 파인드
