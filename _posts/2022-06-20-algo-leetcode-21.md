@@ -5,7 +5,7 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [leetcode, easy, linked-list(single), sorting, complete success]
+    - [leetcode, easy, linked-list(single), sorting, practice finished]
 
 toc: true
 

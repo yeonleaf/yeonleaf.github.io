@@ -5,7 +5,7 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [leetcode, medium, binary search, complete success]
+    - [leetcode, medium, binary search, practice finished]
 
 toc: true
 

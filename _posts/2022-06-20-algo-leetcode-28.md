@@ -5,7 +5,7 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [leetcode, easy, 구현]
+    - [leetcode, easy, 구현, practice finished]
 
 toc: true
 

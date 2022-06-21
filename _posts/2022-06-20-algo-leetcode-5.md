@@ -5,7 +5,7 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [leetcode, medium, dp, complete success]
+    - [leetcode, medium, dp, practice finished]
 
 toc: true
 
