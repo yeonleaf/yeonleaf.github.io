@@ -5,12 +5,12 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [leetcode, medium, saw discussion]
+    - [leetcode, medium, practice finished, ⭐]
 
 toc: true
 
 date: 2022-06-21
-last_modified_at: 2022-06-21
+last_modified_at: 2022-06-22
 ---
 
 ## **문제 링크**
@@ -63,6 +63,69 @@ void anti_rotate(vector<vector<int> > &matrix) {
     }
 }
 ```
+
+---
+---
+
+<br>
+
+---
+---
+ 
+## **CODE 2**: ACCEPTED
+### <u>날짜</u> 2022-06-22
+#### <u>총 소요시간</u> 20m
+
+<br>
+
+#### <u>설계</u>
+```python
+'''
+위와 아래를 바꾼다.
+대칭되는 값을 swap한다.
+
+15 14 12 16
+13 3 6 7
+2 4 8 10
+5 1 9 11
+n = len(matrix)
+1부터 n//2까지
+i와 n-i-1을 교체
+
+대칭되는 값을 swap
+'''
+```
+
+<br>
+
+#### <u>코드</u>
+```python
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        
+        n = len(matrix)
+        for i in range(n//2):
+            matrix[i], matrix[n-i-1] = matrix[n-i-1], matrix[i]
+        
+        for row in matrix:
+            print(*row)
+        
+        for i in range(n):
+            for j in range(i, n):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+                
+```
+
+```python
+for i in range(n):
+    for j in range(i, n):
+```
+for문의 범위 주의! (n, n으로 지정하면 i, j일 때 한 번 swap하고 j, i일때 한 번 더 swap해서 결국 원래대로 돌아오게 된다.)
+
+
 
 ---
 ---
