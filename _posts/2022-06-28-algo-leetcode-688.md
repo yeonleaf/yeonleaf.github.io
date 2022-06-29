@@ -5,12 +5,12 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [leetcode, medium]
+    - [leetcode, medium, practice finished]
 
 toc: true
 
 date: 2022-06-28
-last_modified_at: 2022-06-28
+last_modified_at: 2022-06-29
 ---
 
 ## **문제 링크**
@@ -98,5 +98,80 @@ class Solution:
 [Discusstion Link](https://leetcode.com/problems/knight-probability-in-chessboard/discuss/113954/Evolve-from-recursive-to-dpbeats-94)
 왜 안 되는지 이해가 안 되는데...? 다시 처음부터 풀어 볼 것
 
+---
+---
+
+<br>
+
+---
+---
+ 
+## **CODE 2**: ACCEPTED
+### <u>날짜</u> 2022-06-29
+#### <u>총 소요시간</u> 30m
+
+<br>
+
+#### <u>설계</u>
+```python
+'''
+k move를 하거나 chessboard 밖으로 벗어날 때까지 움직인다.
+knight가 체스판에 남아 있을 확률
+
+체스판 밖으로 넘어갔다면 return 0
+k번 다 움직였다면 return 1
+
+체스판 안에 있고 k번 다 움직이지 않았다면 다음 이동
+'''
+```
+
+<br>
+
+#### <u>코드</u>
+```python
+class Solution:
+    def knightProbability(self, n: int, k: int, row: int, column: int) -> float:
+        # eight에 문제가 있었음
+        eight = [(-2,-1),(-1,-2),(1,-2),(2,-1),(2,1),(1,2),(-1,2),(-2,1)]
+        
+        self.dp = {}
+        
+        def move(i, j, cnt):
+            
+            if (i, j, cnt) in self.dp:
+                return self.dp[(i, j, cnt)]
+            
+            if i < 0 or j < 0 or i >= n or j >= n:
+                return 0
+            
+            if cnt == 0:
+                return 1
+            
+            poss = 0
+            for di, dj in eight:
+                ni, nj = i+di, j+dj
+
+                poss += (0.125 * move(ni, nj, cnt-1))
+            self.dp[(i, j, cnt)] = poss
+            return self.dp[(i, j, cnt)]
+        
+        return move(row, column, k)
+```
+<br>
+
+#### <u>디버깅</u>
+```python
+3
+10
+0
+0
+expected == result
+
+5
+10
+0
+0
+expected == result
+```
 ---
 ---

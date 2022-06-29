@@ -21,7 +21,9 @@ TIL
 <br>
 
 # 태그 목록
-최종 수정일 : 2022-05-13
+최종 수정일 : 2022-06-29
+
+** 모든 태그는 소문자로 작성한다.
 
 ## [1] 알고리즘 관련 태그
 
@@ -41,9 +43,9 @@ TIL
 - dp
     - CLASSIC
         - kadane
-        - LCS
-        - LIS
-        - 2D
+        - lcs
+        - lis
+        - 2d
         - cumulative sum
         - hashmap
     - OTHERS
@@ -101,3 +103,42 @@ TIL
     - dataJPA
     - queryDsl
     - SQL
+
+## [3] trouble-shooting 관련 태그 작성 방법
+
+넣어야 하는 태그는 
+
+- 프로젝트 이름
+- 이슈 번호
+- Progress 번호
+
+ex) ptd #13 p5
+
+<br>
+<br>
+
+# 타이틀 작성 방법
+
+## [1] algorithm
+
+릿코드의 경우 문제의 제목을 그대로 가져오되
+```
+1. Two Sum
+->
+(1) Two Sum
+```
+형태로 바꿔준다. (블로그에서 .을 제목에 넣으면 앞의 숫자를 인식하지 못하는 문제가 있음)
+
+<br>
+
+## [2] til
+
+자유롭게 작성 (보통 배운 내용의 타이틀)
+
+<br>
+
+## [3] trouble-shooting
+
+(optional)
+
+에러가 발생한 것으로 추정되는 메서드 | 에러의 제목
