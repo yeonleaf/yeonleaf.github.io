@@ -1,20 +1,20 @@
 ---
-title: ""
+title: "불량 사용자"
 excerpt: ""
 
 categories:
     - algorithm
 tags:
-    - []
+    - [programmers, lv3]
 
 toc: true
 
-date: 
-last_modified_at: 
+date: 2022-07-01
+last_modified_at: 2022-07-01
 ---
 
 ## **문제 링크**
-[Question Link]()
+[Question Link](https://programmers.co.kr/learn/courses/30/lessons/64064)
 
 <br>
 
@@ -22,7 +22,7 @@ last_modified_at:
 ---
  
 ## **CODE 1**: 
-### <u>날짜</u> 
+### <u>날짜</u> 2022-07-01
 #### <u>총 소요시간</u> 
 
 <br>
@@ -50,7 +50,3 @@ last_modified_at:
 
 ---
 ---
-
-<br>
-
-#### <b> ✅ 최종 comment </b>
