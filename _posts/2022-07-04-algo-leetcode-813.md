@@ -5,12 +5,12 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [leetcode, medium, saw discussion]
+    - [leetcode, medium, practice finished, ⭐]
 
 toc: true
 
 date: 2022-07-03
-last_modified_at: 2022-07-06
+last_modified_at: 2022-07-11
 ---
 
 ## **문제 링크**
@@ -110,5 +110,80 @@ def largestSumOfAverages(self, A, K):
 ---
 
 <br>
+
+---
+---
+ 
+## **CODE 1**: ACCEPTED
+### <u>날짜</u> 2022-07-11
+#### <u>총 소요시간</u> 
+
+<br>
+
+#### <u>설계</u>
+```python
+'''
+i, k (0부터 i까지 k번 나눌 수 있을 때 maximum score)
+
+if k == 0: return sum(nums[:i+1]) / (i+1)
+if c < 0: return 0
+
+maxScore = -1
+for c in i부터 0까지 -1
+    current avg = sum(nums[c:i+1]) / i-c+1
+    maxScore = max(maxScore, rec(c-1, k-1) + current avg)
+return maxScore
+'''
+```
+
+<br>
+
+#### <u>코드</u>
+```python
+class Solution:
+    def largestSumOfAverages(self, nums: List[int], k: int) -> float:
+    
+        self.memo = {}
+        
+        def rec(i, k):
+            if i < 0: return 0
+            if i+1 < k: return -int(1e9)
+            if k == 1: return sum(nums[:i+1]) / (i+1)
+            
+            if (i, k) in self.memo:
+                return self.memo[(i, k)]
+            
+            res = -1
+            for c in range(i, -1, -1):
+                curVal = sum(nums[c:i+1]) / (i-c+1)
+                res = max(res, rec(c-1, k-1) + curVal)
+            self.memo[(i, k)] = res
+            return self.memo[(i, k)]
+        
+        n = len(nums)
+        return rec(n-1, k)
+```
+<br>
+
+#### <u>디버깅</u>
+```python
+[1]
+1
+expected == result
+
+
+[1, 3, 4, 5, 7]
+5
+expected == result
+
+
+[9,1,2,3,9]
+4
+expected == result
+```
+
+---
+---
+
 
 #### <b> ✅ 최종 comment </b>

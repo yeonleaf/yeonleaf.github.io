@@ -5,12 +5,12 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [programmers, lv3, saw discussion]
+    - [programmers, lv3, practice finished]
 
 toc: true
 
 date: 2022-07-05
-last_modified_at: 2022-07-05
+last_modified_at: 2022-07-08
 ---
 
 ## **문제 링크**
@@ -213,7 +213,80 @@ def solution(board):
 ---
 ---
 
+<br>
+
+---
+---
+ 
+## **CODE 2**: ACCEPTED
+### <u>날짜</u> 2022-07-08
+#### <u>총 소요시간</u> 30m
+
+<br>
+
+#### <u>설계</u>
+```python
+'''
+bfs는 방문했던 곳을 다시 방문할 수 없음
+dp[i][j][d] : 현재 i, j에 있고 방향은 d를 바라보고 있을 때 minimum cost (기본값은 int(1e9))
+
+ci, cj, cd
+
+cost = dp[ci][cj][cd]
+for nd in 4방향
+    ni nj가 격자를 벗어나거나 벽이 있으면 continue
+
+    ncost = ccost + 1
+    d != nd이면 ncost = ncost += 5
+    
+    ncost < ccost:
+        dp[ni][nj][nd] = ncost
+        q.append((ni, nj, nd))
+'''
+```
+
+<br>
+
+#### <u>코드</u>
+```python
+from collections import deque
+def solution(board):
+    
+    dirs = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+    
+    n = len(board)
+    dp = [[[int(1e9)]*4 for _ in range(n)] for _ in range(n)]
+    
+    dp[0][0][0] = 0
+    dp[0][0][1] = 0
+    
+    q = deque()
+    q.append((0, 0, 0))
+    q.append((0, 0, 1))
+    
+    while q:
+        ci, cj, cd = q.popleft()
+        for nd in range(4):
+            ni, nj = ci + dirs[nd][0], cj + dirs[nd][1]
+            if 0 <= ni < n and 0 <= nj < n and not board[ni][nj]:
+                ncost = dp[ci][cj][cd] + 1
+                if cd != nd:
+                    ncost += 5
+                if ncost < dp[ni][nj][nd]:
+                    dp[ni][nj][nd] = ncost
+                    if ni == n-1 and nj == n-1:
+                        continue
+                    q.append((ni, nj, nd))
+                    
+    return min(dp[-1][-1])*100
+```
+
+---
+---
+
 
 <br>
 
 #### <b> ✅ 최종 comment </b>
+
+bfs + dp 방법 잘 기억해 놓기 (최소값을 갱신할 수 있을 때만 한 번 방문한 곳에 다시 방문하도록)

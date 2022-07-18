@@ -10,7 +10,7 @@ tags:
 toc: true
 
 date: 2022-07-07
-last_modified_at: 2022-07-07
+last_modified_at: 2022-07-08
 ---
 
 ## **문제 링크**
@@ -137,6 +137,47 @@ A와 B를 번갈아가면서 DFS
 
 ---
 ---
+
+<br>
+
+---
+---
+ 
+## **CODE 2**: 
+### <u>날짜</u> 2022-07-08
+#### <u>총 소요시간</u> 
+
+<br>
+
+#### <u>설계</u>
+```python
+'''
+move = [0, 0]
+loc = [aloc, bloc]
+차례 
+(차례+1)%2
+
+unable = 0
+상하좌우 칸 확인
+    이동하려고 하는 칸에 다른 플레이어가 있는 경우 현재 플레이어가 패배 return sum(move)
+    이동하려고 하는 칸이 보드 밖이거나 발판이 없는 경우 unable += 1 continue
+    해당 칸으로 이동 loc[차례] = [ni, nj] move[차례] += 1
+상하좌우 모두 발판이 없거나 보드 밖이라서 이동할 수 없는 경우 (unable == 4) return sum(move)
+'''
+```
+
+<br>
+
+#### <u>다른 방식</u>
+[Discusstion Link](https://tech.kakao.com/2022/01/14/2022-kakao-recruitment-round-1/)
+[Discussion Link](https://school.programmers.co.kr/questions/25678)
+```python
+미니맥스 알고리즘을 공부하고 위의 글들을 다시 읽어보자.
+```
+
+---
+---
+
 
 <br>
 

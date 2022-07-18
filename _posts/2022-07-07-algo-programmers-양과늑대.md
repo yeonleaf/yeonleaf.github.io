@@ -10,7 +10,7 @@ tags:
 toc: true
 
 date: 2022-07-07
-last_modified_at: 2022-07-07
+last_modified_at: 2022-07-08
 ---
 
 ## **문제 링크**
@@ -106,6 +106,81 @@ def solution(info, edges):
 
 ---
 ---
+
+<br>
+
+---
+---
+ 
+## **CODE 2**: 시간 초과!
+### <u>날짜</u> 2022-07-08
+#### <u>총 소요시간</u> 
+
+<br>
+
+#### <u>설계</u>
+```python
+# able에서 부모 노드를 꺼낸다.
+# 부모 노드가 늑대이면 sheep < wolf+1인지 확인 만약 그렇다면 res = max(res, sheep), return
+# 부모 노드의 직계 자식들을 꺼내서 able에 넣는다.
+# 다음 턴으로 넘어간다.
+```
+
+<br>
+
+#### <u>코드</u>
+```python
+def solution(info, edges):
+
+    n = len(info)
+    adj = [[] for _ in range(n)]
+    
+    for n1, n2 in edges:
+        adj[n1].append(n2)    
+    
+    print(adj)
+    res = 0
+    
+    def dfs(able, sheep, wolf):
+        nonlocal res
+
+        if sheep < wolf:
+            return 
+        
+        while able:
+            node = able.pop()
+        
+            nsheep, nwolf = sheep, wolf
+            
+            if info[node]:
+                nwolf += 1
+            else:
+                nsheep += 1
+            
+            if nsheep < nwolf:
+                return 
+            res = max(res, nsheep)
+
+            dfs(able+adj[node], nsheep, nwolf)
+
+                    
+    dfs([0], 0, 0)
+    return res
+```
+<br>
+
+#### <u>디버깅</u>
+```python
+[0, 1], [[0, 1]]
+expected == result
+
+[0, 1, 1, 0, 0, 0, 1, 0, 0], [[0, 1], [0, 2], [1, 3], [1, 4], [2, 5], [2, 6], [6, 7], [6, 8]]
+expected != result
+```
+
+---
+---
+
 
 <br>
 
