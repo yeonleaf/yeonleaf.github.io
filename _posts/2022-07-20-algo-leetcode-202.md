@@ -5,7 +5,7 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [leetcode, easy, need optimization]
+    - [leetcode, easy, practice finished]
 
 toc: true
 
@@ -117,5 +117,60 @@ bool isHappy(int n) {
 ---
 
 <br>
+
+---
+---
+ 
+## **CODE 2**: ACCEPTED
+### <u>날짜</u> 2022-07-21
+#### <u>총 소요시간</u> 20m
+
+<br>
+
+#### <u>설계</u>
+```python
+'''
+floyd cycle detection 알고리즘
+
+slow, fast
+slow == fast이면 return False
+
+
+'''
+```
+
+<br>
+
+#### <u>코드</u>
+```python
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        
+        def trans(num):
+            strn = str(num)
+            dummy = 0
+            
+            for num in strn:
+                dummy += pow(int(num), 2)
+            
+            return dummy
+        
+        slow, fast = n, n
+        
+        while True:
+            slow = trans(slow)
+            
+            fast = trans(trans(fast))
+            if slow == 1 or fast == 1:
+                return True
+            if slow == fast:
+                return False
+        return True
+```
+<br>
+
+---
+---
+
 
 #### <b> ✅ 최종 comment </b>
