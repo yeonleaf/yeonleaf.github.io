@@ -5,7 +5,7 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [leetcode, medium, saw discussion]
+    - [leetcode, medium, practice finished]
 
 toc: true
 
@@ -90,9 +90,49 @@ expected == result
 ```
 
 for문으로 다시 풀어보기 (원리 자체는 잘 접근했음. 함수 최적화가 안 되어서 시간초과가 나는 것 같음)
+
 ---
 ---
 
 <br>
 
+<br>
+
+---
+---
+ 
+## **CODE 2**: ACCEPTED
+### <u>날짜</u> 2022-07-22 
+#### <u>총 소요시간</u> 
+
+<br>
+
+#### <u>코드</u>
+```python
+import math
+class Solution:
+    def countPrimes(self, n: int) -> int:
+
+        if n < 2: return 0
+        
+        nums = [1 for _ in range(n)]
+        nums[0], nums[1] = 0, 0
+        
+        d = 2
+        
+        for i in range(2, int(math.sqrt(n))+1):
+            if nums[i]:
+                for j in range(i, n, i):
+                    if i == j: continue
+                    if nums[j]: nums[j] = 0
+        return sum(nums)
+        
+```
+
+
+---
+---
+
 #### <b> ✅ 최종 comment </b>
+
+소수 구할 때 = 에라스토네스의 체 + 탐색 범위는 math.sqrt(n)+1

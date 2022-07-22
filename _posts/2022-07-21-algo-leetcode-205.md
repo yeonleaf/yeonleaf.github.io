@@ -5,7 +5,7 @@ excerpt: ""
 categories:
     - algorithm
 tags:
-    - [leetcode, easy, saw discussion]
+    - [leetcode, easy, practice finished]
 
 toc: true
 
@@ -151,5 +151,39 @@ class Solution(object):
 
 
 <br>
+
+
+---
+---
+ 
+## **CODE 2**: ACCEPTED
+### <u>날짜</u> 2022-07-22
+#### <u>총 소요시간</u> 5m
+
+<br>
+
+#### <u>코드</u>
+```python
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        
+        s2t = {}
+        t2s = {}
+        
+        n = len(s)
+        
+        for i in range(n):
+            if s[i] in s2t and s2t[s[i]] != t[i]: return False
+            if t[i] in t2s and t2s[t[i]] != s[i]: return False
+            
+            s2t[s[i]] = t[i]
+            t2s[t[i]] = s[i]
+        
+        return True
+        
+```
+
+---
+---
 
 #### <b> ✅ 최종 comment </b>
